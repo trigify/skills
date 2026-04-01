@@ -10,8 +10,11 @@ Agent skills for working with Trigify — social listening searches, automated w
 
 ### Claude Code
 
+Claude Code discovers skills from `.claude/skills/` directories in your project:
+
 ```bash
-claude skill add --from github:trigify/skills
+mkdir -p .claude/skills/trigify
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL.md > .claude/skills/trigify/SKILL.md
 ```
 
 ### Cursor
