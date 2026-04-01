@@ -6,11 +6,17 @@ Agent skills for working with Trigify — social listening searches, automated w
 
 **trigify-tools** — Expert guidance for all Trigify operations: creating searches with proper Boolean logic, building and testing workflows, enrichment, X/Twitter posting, credit management, and integration health checks.
 
+**Files:**
+- `SKILL.md` — Main skill prompt (references files in `references/`)
+- `SKILL-FULL.md` — Bundled version with all references inlined (for single-file agents)
+- `references/search-guide.md` — Boolean query rules, platform-specific requirements, keyword strategies
+- `references/workflow-patterns.md` — Workflow decision trees, patterns, and testing procedures
+
 ## Installation
 
 ### Claude Code
 
-Claude Code discovers skills from `.claude/skills/` directories in your project. Clone the full repo to include reference guides:
+Claude Code discovers skills from `.claude/skills/` directories. Clone the full repo:
 
 ```bash
 git clone https://github.com/trigify/skills.git .claude/skills/trigify
@@ -20,66 +26,49 @@ To update: `cd .claude/skills/trigify && git pull`
 
 ### Cursor
 
-Add to `.cursor/rules/trigify.mdc` in your project:
-
-```
----
-description: MUST USE for ANY Trigify operation — searches, workflows, enrichment, X/Twitter, or anything involving social listening and workflow automation.
-globs:
----
-
-<paste contents of SKILL.md and references/*.md here>
-```
-
-Or fetch it directly:
+Use `SKILL-FULL.md` which bundles all reference guides into one file:
 
 ```bash
 mkdir -p .cursor/rules
-curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL.md > .cursor/rules/trigify.mdc
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md > .cursor/rules/trigify.mdc
 ```
 
 ### Windsurf
 
-Add to `.windsurfrules` in your project root:
-
 ```bash
-curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL.md >> .windsurfrules
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md >> .windsurfrules
 ```
 
-Or paste the contents of `SKILL.md` into **Windsurf Settings > Rules**.
+Or paste the contents of `SKILL-FULL.md` into **Windsurf Settings > Rules**.
 
 ### GitHub Copilot
 
-Add to `.github/copilot-instructions.md` in your repo:
-
 ```bash
 mkdir -p .github
-curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL.md >> .github/copilot-instructions.md
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md >> .github/copilot-instructions.md
 ```
 
 ### Cline
 
 1. Open VS Code → Cline sidebar → Settings (gear icon)
-2. Paste the contents of `SKILL.md` into **Custom Instructions**
+2. Paste the contents of [`SKILL-FULL.md`](https://github.com/trigify/skills/blob/main/SKILL-FULL.md) into **Custom Instructions**
 
 Or add to `.clinerules` in your project root:
 
 ```bash
-curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL.md >> .clinerules
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md >> .clinerules
 ```
 
 ### Aider
 
-Add to `.aider.conf.yml` in your project:
+```bash
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md > SKILL.md
+```
+
+Then add to `.aider.conf.yml`:
 
 ```yaml
 read: SKILL.md
-```
-
-Then place the file locally:
-
-```bash
-curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL.md > SKILL.md
 ```
 
 ### Continue
@@ -89,23 +78,22 @@ Add to your `.continue/config.yaml`:
 ```yaml
 docs:
   - title: "Trigify Tools"
-    startUrl: "https://raw.githubusercontent.com/trigify/skills/main/SKILL.md"
+    startUrl: "https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md"
 ```
 
 ### Any other agent
 
-Copy the skill files into whatever custom instructions mechanism your agent supports:
+Download the bundled skill file and paste into your agent's custom instructions:
 
 ```bash
-# Download all skill files
-git clone https://github.com/trigify/skills.git trigify-skills
-
-# The key files:
-# trigify-skills/SKILL.md              — Main skill prompt
-# trigify-skills/references/*.md       — Detailed reference guides
+curl -sL https://raw.githubusercontent.com/trigify/skills/main/SKILL-FULL.md
 ```
 
-Paste the contents of `SKILL.md` into your agent's system prompt or custom instructions. For full coverage, also include the reference files — they contain detailed Boolean query rules and workflow patterns.
+Or clone the full repo for access to individual files:
+
+```bash
+git clone https://github.com/trigify/skills.git trigify-skills
+```
 
 ## Usage
 
